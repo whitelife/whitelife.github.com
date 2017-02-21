@@ -14,7 +14,7 @@ Datepicker 를 사용하여 선택하는 날짜를 받아오는 이벤트는 onS
 - dateStr: 날짜 문자열
 - inst: Datepicker Object
 
-{% highlight JavaScript linenos %}
+```javascript
 /* Update the input field with the selected date. */
 _selectDate: function(id, dateStr) {
     var onSelect,
@@ -45,12 +45,12 @@ _selectDate: function(id, dateStr) {
         this._lastInput = null;
     }
 },
-{% endhighlight %}
+```
 
 inst.inline 기준에 따라 this._updateDatepicker( inst ) 함수를 호출 하여 위에서 언급한 상황이 재연 된다. 현상을 해결 하기 위해서는 onSelect 함수를 아래와 같이 구현하여 호출 되지 않도록 해야 한다.
 
-{% highlight JavaScript linenos %}
-$datepicker.datepicker( { 
+```javascript
+$datepicker.datepicker( {
   inline: true,
   showOtherMonths: true,
   showMonthAfterYear: true,
@@ -62,7 +62,7 @@ $datepicker.datepicker( {
     customSelect( date ); // 사용자 정의 구현 함수
   }
 } );
-{% endhighlight %}
+```
 
 위 소스를 참고하여 적용 한다면, 깜박임 현상은 해결 된다. customSelect( date ) 로 정의한 함수는 스타일에 맞게 적용 하도록 한다.
 
