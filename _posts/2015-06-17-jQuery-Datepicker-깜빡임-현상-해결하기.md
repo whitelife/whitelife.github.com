@@ -1,7 +1,7 @@
 ---
 layout: post
 title: jQuery Datepicker 깜빡임 현상 해결하기
-date: 2015-06-17 00:00:00 +0900
+date: 2015-06-17 00:00:00
 categories: jQuery
 ---
 
