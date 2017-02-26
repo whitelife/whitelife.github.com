@@ -4,11 +4,13 @@ title: node.js
 permalink: /node.js/
 ---
 
-## 목차
+## 설치
 
 1. [Node.js 설치하기](https://whitelife.github.io/node/js/2017/02/13/Node.js-Install.html)
+2. [AWS EC2 Nginx 설치하기](https://whitelife.github.io/aws/2017/02/25/AWS-EC2-Nginx-%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0.html)
+3. [AWS EC2 Nginx Node.js 연결하기](https://whitelife.github.io/aws/2017/02/27/AWS-EC2-Nginx-Node.js-%EC%97%B0%EA%B2%B0%ED%95%98%EA%B8%B0.html)
 
-## 비고
+## 참고
 
 1. [Node.js NPM v3 사용하기](https://whitelife.github.io/node/js/2017/02/02/Node.js-NPM-v3-%EC%82%AC%EC%9A%A9%ED%95%98%EA%B8%B0.html)
 2. [Node.js Error 처리 방법](https://whitelife.github.io/node/js/2017/02/22/Node.js-ErrorHandling.html)
