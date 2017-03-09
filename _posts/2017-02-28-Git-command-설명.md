@@ -5,127 +5,171 @@ date: 2017-02-28 00:00:00
 categories: git
 ---
 
-- 저장소 받아오기
+## Branch
+
+### 모든 branch 목록보기
+
+local, remote branch가 조회된다.
 
 ```
-git clone https://github.com/whitelife/whitelife.github.com.git
+git branch --all
+* develop
+  feature/test
+  master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/develop
+  remotes/origin/hotfix
+  remotes/origin/master
 ```
 
-- 파일 추가
+### 원격 저장소에 branch 발행하기
 
 ```
-git add file
-git add *
+$ git push origin feature/test
+ * [new branch]      feature/test -> feature/test
 ```
 
-- 확정하기
+### 원격 저장소에 branch 삭제하기
 
 ```
-git commit -m "설명"
+ git push origin --delete feature/test
+ - [deleted]         feature/test
 ```
 
-- 발행하기
+## 기능개발하기
 
-local 저장소에서 remote 저장소로 올리기.
+### 개발 branch 전환하기
 
-```
-git push origin master
-```
-
-- branch 만들기
+개발 branch로 이동한다.
 
 ```
-git checkout -b feature
+git checkout develop
+Switched to branch 'develop'
+Your branch is up-to-date with 'origin/develop'.
 ```
 
-- branch 이동하기
+### branch 생성하기
+
+local branch를 생성한다.
 
 ```
-git checkout master
+git checkout -b feature/test
+Switched to a new branch 'feature/test'
 ```
 
-- local branch 삭제하기
+### 수정사항 branch 적용하기
+
+#### 수정사항 추가
 
 ```
-git checkout -d feature
+git add benchmark/test.js
 ```
 
-- remote branch 삭제하기
+#### 수정사항 확정
 
 ```
-git push origin --delete feature
+git commit -m 'test commit'
+[feature/test 339387a] test commit
+The file will have its original line endings in your working directory.
+ 1 file changed, 4 insertions(+)
+ create mode 100644 benchmark/test.js
 ```
 
-- remote branch 발행하기
+자세하게 메시지 작성이 필요한경우 사용한다.
 
 ```
-git push origin feature
+git commit --amend
+
+test commit
+
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+#
+# Date:      Thu Mar 9 01:57:27 2017 +0000
+#
+# On branch feature/test
+# Changes to be committed:
+#       new file:   benchmark/test.js
+#
 ```
 
-- 갱신하기
+## log 확인하기
+
+### 간단한 log 보기
 
 ```
-git pull
+git log --oneline
+feb44a9 test commit
 ```
 
-- branch 병합하기
+### 상세 log 보기
 
 ```
-git merge feature
+$ git log feb44a9 --max-count=1
+commit feb44a9e9ad33c93b8ca470fef9890072ae3f597
+Author: unknown <parkmc_0@naver.com>
+Date:   Thu Mar 9 01:57:27 2017 +0000
+
+    test commit
 ```
 
-- branch 비교하기
+### log 및 수정사항 보기
 
 ```
-git diff feature master
+$ git show feb44a9e9ad33c93b8ca470fef9890072ae3f597
+commit feb44a9e9ad33c93b8ca470fef9890072ae3f597
+Author: unknown <parkmc_0@naver.com>
+Date:   Thu Mar 9 01:57:27 2017 +0000
+
+    test commit
+
+diff --git a/benchmark/test.js b/benchmark/test.js
+new file mode 100644
+index 0000000..7bcf7c2
+--- /dev/null
++++ b/benchmark/test.js
+@@ -0,0 +1,4 @@
++
++'use strict';
++
++console.log('test');
 ```
 
-- tag 생성하기
+## 취소 및 복구
+
+### 파일 추가 취소하기
 
 ```
-git tag v1.0
+git rm --cached benchmark/test.js
 ```
 
-- local tag 삭제하기
+### 삭제한 파일 복구하기
 
 ```
-git tag -d v1.0
+git checkout -- benchmark/test.js
 ```
 
-- remote tag 삭제하기
+### commit 합치기
+
+2개의 commit을 합친다.
 
 ```
-git push origin :refs/tags/v1.0
+git reset HEAD~2
 ```
 
-- remote tag 발행하기
+### commit 취소하기
 
 ```
-git push origin v1.0
+git revert 1f46efe5f368e04615d56994b3e89ab74591d7af
+[feature/test 3caf4cc] Revert "test commit"
+ 1 file changed, 5 deletions(-)
+ delete mode 100644 benchmark/test.js
 ```
 
-- local 파일 HEAD 복원하기
+### merge 취소하기
 
 ```
-git checkout -- file
+git reset --merge develop
 ```
 
-- 발행 hash 확인
 
-```
-git rev-list --reverse HEAD
-git rev-list --reverse HEAD | head -1
-```
-
-- simple log
-
-```
-git log --pretty=oneline
-git log --pretty=oneline --reverse
-```
-
-- tree log
-
-```
-git log --pretty=oneline --graph --decorate --all
-```
